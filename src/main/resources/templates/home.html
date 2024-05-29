@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="_layout">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Home</title>
-</head>
-<body>
-<div layout:fragment="content" class="row">
-    <ul>
-        <li
-            th:each="course : ${listcourse}"
-            th:text="${course.getStartDate()} + ' - '
-                + ${course.getLectureName()} + ', '
-                + ${course.getPlace()}"></li>
-    </ul>
-</div>
-</body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="_layout">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Home</title>
+	</head>
+	<body>
+		<div layout:fragment="content" class="row">
+			<div class="col-sm-6 mb-3 mb-sm-0 mt-4" th:each="course : ${listcourse}">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title" th:text="${course.getLectureName()}"></h5>
+						<p class="card-text" th:text="${course.getPlace()}"></p>
+						<a href="#" class="btn btn-primary" th:text="${course.getStartDate()}"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
 </html>
