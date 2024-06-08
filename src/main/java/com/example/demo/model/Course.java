@@ -1,43 +1,41 @@
 package com.example.demo.model;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
+@Setter
+@Getter
+@RequiredArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "courses")
 public class Course {
-    private int id;
-    private String place;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotBlank(message = "Tên khóa học không được bỏ trống!")
+    private String name;
+
+    @NotBlank(message = "Tên giáo viên không được bỏ trống!")
+    @Column(name = "teacher_name")
+    private String teacherName;
+
+    @NotBlank(message = "Địa điểm không được bỏ trống!")
+    private String address;
+
+    @NotNull(message = "Ngày bắt đầu là bắt buộc!")
+    @Future(message = "Ngày bắt đầu phải lớn hơn ngày hiện tại!")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "start_date")
     private LocalDate startDate;
-    private String lectureName;
-
-    // Getters and setters
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place;
-    }
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public String getLectureName() {
-        return lectureName;
-    }
-
-    public void setLectureName(String lectureName) {
-        this.lectureName = lectureName;
-    }
 }
